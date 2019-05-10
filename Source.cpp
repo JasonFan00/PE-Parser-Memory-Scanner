@@ -80,7 +80,7 @@ int main(void)
 	//  Get Nt Header
 	if (!ReadProcessMemory(hProc, reinterpret_cast<const void*>(baseAddr + DosHeader.e_lfanew), &ntHeader, sizeof(IMAGE_NT_HEADERS), nullptr))
 	{
-		std::cout << "Failure reading memoryfor IMAGE_NT_HEADERS, ending..." << std::endl;
+		std::cout << "Failure reading memory for IMAGE_NT_HEADERS, ending..." << std::endl;
 		system("pause");
 		return 1;
 	}
@@ -212,7 +212,7 @@ DWORD get_pID()
 	{
 		std::cin >> pID;
 	} while (std::cin.fail());
-
+	
 	return pID;
 }
 
