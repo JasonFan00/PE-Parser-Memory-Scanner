@@ -59,7 +59,7 @@ int main(void)
 	//  Determine CPU architecture to know which module flag to use when snapshotting modules.  Doesn't really matter anymore.
 	if (sysInfo.wProcessorArchitecture == 9 || sysInfo.wProcessorArchitecture == 12)
 	{
-		hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pID); 
+		hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pID);
 	}
 	else
 	{
@@ -120,9 +120,9 @@ int main(void)
 	}
 
 	std::cout << "--------------------------" << std::endl << "Below are the following matches: " << std::endl;
-
+	std::cout << addrs.size() << "\n";
 	//  Loop through vector of scanned values
-	if (addrs.size() > 1)
+	if (addrs.size() > 0)
 	{
 		for (std::vector<int*>::iterator i = addrs.begin(); i != addrs.end(); i++)
 		{
@@ -131,7 +131,7 @@ int main(void)
 	}
 	else
 	{
-		std::cout << std::setw(5) << "" << "None found of value " << searchValue << ", have you already written to it previously? Ending..." << std::endl;
+		std::cout << std::setw(5) << "" << "No global variables found of value " << searchValue << ", have you already written to it previously? Ending..." << std::endl;
 		system("pause");
 		return 0;
 	}
@@ -169,7 +169,7 @@ BYTE* enum_modules(HANDLE hSnap)
 		do
 		{
 			std::cout << "Searching modules..." << std::endl;
-			if ((std::string(mod32.szModule)).find(".exe"))
+			if (std::wstring((mod32.szModule)).find(L".exe"))
 			{
 				std::cout << "Found module match: " << mod32.szModule << std::endl;
 				return mod32.modBaseAddr;
@@ -185,6 +185,7 @@ std::vector<int*> search_bytes(DWORD offset, DWORD virtualSize, int searchValue)
 	std::cout << "Searching .data section memory..." << std::endl;
 	std::vector<int*> addrs;
 	BYTE* ptr = baseAddr + offset;
+
 	int currentVal;
 	for (int i = 0; i < (int)virtualSize; i++)
 	{
@@ -194,6 +195,7 @@ std::vector<int*> search_bytes(DWORD offset, DWORD virtualSize, int searchValue)
 
 		if (currentVal == searchValue)
 		{
+			std::cout << currentVal << " " << searchValue << "\n";
 			addrs.push_back(currentPtr);
 		}
 
@@ -212,7 +214,7 @@ DWORD get_pID()
 	{
 		std::cin >> pID;
 	} while (std::cin.fail());
-	
+
 	return pID;
 }
 
