@@ -5,4 +5,4 @@ Picks apart the MS-PE file format of an external running process and scans the g
 
 I compiled this as 32bit, and so this will scan 32bit programs. This program opens handles to other processes, so it needs certain privileges if a process is protected. Currently it scans for integer values, however that can be easily changed. I made this solely as a demonstration and to improve my knowledge, so an actual debugger would be more useful than this. I got the idea of this program when looking into how video game hackers created their "tools".
 
-To test I made a simple dummy console application with a global integer variable. I also included it in the release section.
+To test I made a simple dummy console application with a global integer variable. I also included it in the release section
