@@ -1,5 +1,5 @@
 # PE-Parser-Memory-Scanner
-One of my first "significant" learning projects.  The code is probably a mess, and there's much more I could understand about the PE format (and window apps in general), but a lot of what I learned from this project formed the basis for my future.
+One of my first "significant" learning projects.  The code is probably a mess, and there's much more I could understand about the PE format (and window apps in general), but a lot of what I learned from this project formed the basis for my future of project-based learning.
 
 A windows console application I made that parses the portable executable file format and scans the data segment for an inputted int value.
 
